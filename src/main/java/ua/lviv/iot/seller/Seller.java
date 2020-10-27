@@ -3,6 +3,7 @@ package ua.lviv.iot.seller;
 import ua.lviv.iot.model.Hamster;
 
 public class Seller {
+	public static int counter = 0;
 	private static Hamster[] hamsters;
 	private static int numberOfFoodPackagesAvailable;
 
@@ -21,6 +22,7 @@ public class Seller {
 		int pivotPosition = findPivotPosition(startPivotPosition, endPivotPosition);
 		int numberOfFoodPackages = 0;
 		for (int hamsterPosition = 0; hamsterPosition <= pivotPosition; hamsterPosition++) {
+			counter++;
 			hamsters[hamsterPosition].setTotalFoodConsuming(pivotPosition);
 			numberOfFoodPackages += hamsters[hamsterPosition].getTotalFoodConsuming();
 		}
@@ -37,6 +39,7 @@ public class Seller {
 		Hamster pivot = hamsters[startPosition];
 		int leftPosition = startPosition+1;
 		for(int currentPosition = leftPosition; currentPosition <= endPosition; currentPosition++) {
+			counter++;
 			if(hamsters[currentPosition].getTotalFoodConsuming() < pivot.getTotalFoodConsuming()) {
 				swap(currentPosition, leftPosition++);
 			}
