@@ -12,6 +12,15 @@ public class Seller {
 		Seller.numberOfFoodPackagesAvailable = numberOfFoodPackagesAvailable;
 		int length = hamsters.length;
 		int maxNumberOfHamsters = getMaxNumberOfHamsters(0, length - 1) + 1;
+		if(maxNumberOfHamsters == 0) {
+			counter++;
+			for(int i = 0; i < length; i++) {
+				if(hamsters[i].getDailyNorm() <= numberOfFoodPackagesAvailable) {
+					maxNumberOfHamsters++;
+					break;
+				}
+			}
+		}
 		return maxNumberOfHamsters;
 	}
 	
