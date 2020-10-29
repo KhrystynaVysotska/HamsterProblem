@@ -6,8 +6,9 @@ import java.util.List;
 import ua.lviv.iot.model.Hamster;
 
 public class SellerVersion2 {
-	private static List<Hamster> suitableHamsters = new LinkedList<>();
+	private static List<Hamster> suitableHamsters;
 	public static int findMaxNumberOfHamsters(int numberOfFoodPackagesAvailable, Hamster[] hamsters) {
+		suitableHamsters = new LinkedList<>();
 		for(Hamster hamster:hamsters) {
 			if(checkIfCanLiveWithAllPrevious(hamster, numberOfFoodPackagesAvailable)) {
 				suitableHamsters.add(hamster);
