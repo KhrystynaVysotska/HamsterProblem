@@ -29,15 +29,15 @@ public class SellerTest {
 	
 	@Test
 	public void testFirstCaseHamsters() {
-		assertEquals(2, Seller.findMaxNumberOfHamsters(7, firstCaseHamsters));
+		assertEquals(2, SellerVersion2.findMaxNumberOfHamsters(7, firstCaseHamsters));
 	}
 	
 	@Test
 	public void testSecondCaseHamsters() {
-		assertEquals(3, Seller.findMaxNumberOfHamsters(19, secondCaseHamsters));
+		assertEquals(3, SellerVersion2.findMaxNumberOfHamsters(19, secondCaseHamsters));
 	}
 	@Test
 	public void testThirdCaseHamsters() {
-		assertEquals(1, Seller.findMaxNumberOfHamsters(2, thirdCaseHamsters));
+		assertEquals(1, SellerVersion2.findMaxNumberOfHamsters(2, thirdCaseHamsters));
 	}
 }
