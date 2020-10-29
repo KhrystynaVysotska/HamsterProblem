@@ -14,30 +14,33 @@ public class SellerTest {
 	
 	@Before
 	public void initTestArray() {
-		firstCaseHamsters[0] = new Hamster(1, 2, 2);
-		firstCaseHamsters[1] =  new Hamster(2, 2, 2);
-		firstCaseHamsters[2] =  new Hamster(3, 1, 2);
+		firstCaseHamsters[0] = new Hamster(1, 2, 0);
+		firstCaseHamsters[1] =  new Hamster(2, 2, 0);
+		firstCaseHamsters[2] =  new Hamster(3, 1, 0);
 		
-		secondCaseHamsters[0] = new Hamster(5, 0, 3);
-		secondCaseHamsters[1] = new Hamster(2, 2, 3);
-		secondCaseHamsters[2] = new Hamster(1, 4, 3);
-		secondCaseHamsters[3] = new Hamster(5, 1, 3);
+		secondCaseHamsters[0] = new Hamster(5, 0, 0);
+		secondCaseHamsters[1] = new Hamster(2, 2, 0);
+		secondCaseHamsters[2] = new Hamster(1, 4, 0);
+		secondCaseHamsters[3] = new Hamster(5, 1, 0);
 		
-		thirdCaseHamsters[0] = new Hamster(1, 50000, 1);
-		thirdCaseHamsters[1] = new Hamster(1, 60000, 1);
+		thirdCaseHamsters[0] = new Hamster(1, 50000, 0);
+		thirdCaseHamsters[1] = new Hamster(1, 60000, 0);
 	}
 	
 	@Test
 	public void testFirstCaseHamsters() {
-		assertEquals(2, SellerVersion2.findMaxNumberOfHamsters(7, firstCaseHamsters));
+		int result = SellerVersion2.findMaxNumberOfHamsters(7, firstCaseHamsters);
+		assertEquals(2, result);
 	}
 	
 	@Test
 	public void testSecondCaseHamsters() {
-		assertEquals(3, SellerVersion2.findMaxNumberOfHamsters(19, secondCaseHamsters));
+		int result = SellerVersion2.findMaxNumberOfHamsters(19, secondCaseHamsters);
+		assertEquals(3, result);
 	}
 	@Test
 	public void testThirdCaseHamsters() {
-		assertEquals(1, SellerVersion2.findMaxNumberOfHamsters(2, thirdCaseHamsters));
+		int result = SellerVersion2.findMaxNumberOfHamsters(2, thirdCaseHamsters);
+		assertEquals(1, result);
 	}
 }
