@@ -4,11 +4,10 @@ public class Hamster {
 
 	private int dailyNorm;
 	private int greedinessPerOneHamster;
-	private int totalFoodConsuming;
-	public Hamster(int dailyNorm, int greedinessPerOneHamster, int numberOfOtherHamsters) {
+	
+	public Hamster(int dailyNorm, int greedinessPerOneHamster) {
 		this.dailyNorm = dailyNorm;
 		this.greedinessPerOneHamster = greedinessPerOneHamster;
-		setTotalFoodConsuming(numberOfOtherHamsters);
 	}
 	public int getDailyNorm() {
 		return dailyNorm;
@@ -16,10 +15,7 @@ public class Hamster {
 	public int getGreedinessPerOneHamster() {
 		return greedinessPerOneHamster;
 	}
-	public int getTotalFoodConsuming() {
-		return totalFoodConsuming;
-	}
-	public void setTotalFoodConsuming(int numberOfOtherHamsters) {
-		this.totalFoodConsuming = dailyNorm + greedinessPerOneHamster * numberOfOtherHamsters;
+	public int getTotalFoodConsuming(int numberOfOtherHamsters) {
+		return dailyNorm + greedinessPerOneHamster * numberOfOtherHamsters;
 	}
 }
