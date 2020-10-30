@@ -1,66 +1,40 @@
 package ua.lviv.iot.seller;
 
 import ua.lviv.iot.model.Hamster;
+import ua.lviv.iot.structure.MinHeap;
 
 public class Seller {
-	public static int counter = 0;
-	private static Hamster[] hamsters;
-	private static int numberOfFoodPackagesAvailable;
+	private Hamster[] hamsters;
+	private int numberOfFoodPackagesAvailable;
 
-	public static int findMaxNumberOfHamsters(int numberOfFoodPackagesAvailable, Hamster[] hamsters) {
-		Seller.hamsters = hamsters.clone();
-		Seller.numberOfFoodPackagesAvailable = numberOfFoodPackagesAvailable;
-		int length = hamsters.length;
-		int maxNumberOfHamsters = getMaxNumberOfHamsters(0, length - 1) + 1;
-		if(maxNumberOfHamsters == 0) {
-			counter++;
-			for(int i = 0; i < length; i++) {
-				if(hamsters[i].getDailyNorm() <= numberOfFoodPackagesAvailable) {
-					maxNumberOfHamsters++;
-					break;
-				}
-			}
-		}
-		return maxNumberOfHamsters;
+	public Seller(Hamster[] hamsters, int numberOfFoodPackagesAvailable) {
+		this.hamsters = hamsters;
+		this.numberOfFoodPackagesAvailable = numberOfFoodPackagesAvailable;
 	}
-	
-	private static int getMaxNumberOfHamsters(int startPivotPosition, int endPivotPosition) {
-		if(startPivotPosition > endPivotPosition) {
-			return startPivotPosition - 1;
+
+	public int findMaxNumberOfHamsters() {
+		MinHeap heap = new MinHeap(hamsters.length);
+		return findMaxNumberOfHamsters(0, hamsters.length - 1, heap);
+	}
+
+	private int findMaxNumberOfHamsters(int startPosition, int lastPosition, MinHeap heap) {
+		if(lastPosition < startPosition) {
+			return startPosition;
 		}
-		int pivotPosition = findPivotPosition(startPivotPosition, endPivotPosition);
-		int numberOfFoodPackages = 0;
-		for (int hamsterPosition = 0; hamsterPosition <= pivotPosition; hamsterPosition++) {
-			counter++;
-			hamsters[hamsterPosition].setTotalFoodConsuming(pivotPosition);
-			numberOfFoodPackages += hamsters[hamsterPosition].getTotalFoodConsuming();
+		heap.clearHeap();
+		int mediumPosition = (startPosition + lastPosition) / 2;
+		int foodPackagesConsumed = 0;
+		for (Hamster hamster : hamsters) {
+			heap.insert(hamster.getTotalFoodConsuming(mediumPosition));
 		}
-		if(numberOfFoodPackages < numberOfFoodPackagesAvailable) {
-			return getMaxNumberOfHamsters(pivotPosition + 1, endPivotPosition);
-		} else if(numberOfFoodPackages > numberOfFoodPackagesAvailable) {
-			return getMaxNumberOfHamsters(startPivotPosition, pivotPosition - 1);
-		} else {
-			return pivotPosition;
+		for (int counter = 0; counter <= mediumPosition; counter++) {
+			foodPackagesConsumed += heap.deleteMinimum();
+		}
+		if (foodPackagesConsumed <= numberOfFoodPackagesAvailable) {
+			return findMaxNumberOfHamsters(mediumPosition + 1, lastPosition, heap);
+		} else  {
+			return findMaxNumberOfHamsters(startPosition, mediumPosition - 1, heap);
 		}
 	}
 
-	private static int findPivotPosition(int startPosition, int endPosition) {
-		Hamster pivot = hamsters[startPosition];
-		int leftPosition = startPosition+1;
-		for(int currentPosition = leftPosition; currentPosition <= endPosition; currentPosition++) {
-			counter++;
-			if(hamsters[currentPosition].getTotalFoodConsuming() < pivot.getTotalFoodConsuming()) {
-				swap(currentPosition, leftPosition++);
-			}
-		}
-		swap(startPosition, leftPosition-1);
-		return leftPosition-1;
-	}
-
-	private static void swap(int currentPosition, int leftPosition) {
-		Hamster temp = hamsters[currentPosition];
-		hamsters[currentPosition] = hamsters[leftPosition];
-		hamsters[leftPosition] = temp;
-		
-	}
 }

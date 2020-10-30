@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 import ua.lviv.iot.model.Hamster;
-import ua.lviv.iot.seller.SellerVersion3;
+import ua.lviv.iot.seller.Seller;
 
 public class Launcher {
 	public static void main(String[] args) throws IOException {
@@ -22,7 +22,7 @@ public class Launcher {
 				hamsters[counter] = new Hamster(Integer.parseInt(scanner.next()), Integer.parseInt(scanner.next()));
 			}
 		}
-		SellerVersion3 seller = new SellerVersion3(hamsters, numberOfFoodPackagesAvailable);
+		Seller seller = new Seller(hamsters, numberOfFoodPackagesAvailable);
 		int maxMaxNumberOfHamsters =seller.findMaxNumberOfHamsters(); 
 		BufferedWriter writer = new BufferedWriter(new FileWriter(outputFileName));
 		writer.write(maxMaxNumberOfHamsters+"");
